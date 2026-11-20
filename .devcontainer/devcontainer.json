@@ -1,0 +1,17 @@
+// Shared development environment. See README.md in this directory.
+{
+    "name": "Development",
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".",
+        "target": "dev"
+    },
+    "remoteUser": "dev",
+    "postCreateCommand": "sh .devcontainer/post-create.sh",
+    // Editor settings are optional. The container works the same from a shell.
+    "customizations": {
+        "vscode": {
+            "extensions": ["editorconfig.editorconfig"]
+        }
+    }
+}

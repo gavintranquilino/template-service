@@ -1,0 +1,11 @@
+# Machine-local configuration and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
+
+# Add tool-specific caches, build outputs, and local configuration as needed.
