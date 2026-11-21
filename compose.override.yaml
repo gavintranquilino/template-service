@@ -1,0 +1,13 @@
+# Builds the image from this clone of the repository:
+#
+#   docker compose up -d --build
+#
+# Docker Compose loads this file automatically when it sits next to
+# compose.yaml. Servers that download only compose.yaml have no build
+# settings, so an update can never fall back to building unreleased code.
+
+services:
+  app:
+    build:
+      context: .
+      target: runtime

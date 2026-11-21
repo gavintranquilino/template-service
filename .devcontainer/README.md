@@ -4,7 +4,7 @@ The dev container gives every contributor the same Linux development environment
 
 ## What Is Included
 
-The image is defined in the [Dockerfile](Dockerfile) and configured by [devcontainer.json](devcontainer.json).
+The image is the `dev` stage of the root [Dockerfile](../Dockerfile) and is configured by [devcontainer.json](devcontainer.json). The same file defines the runtime image that servers run.
 
 * **Operating system:** Ubuntu 26.04 LTS.
 * **Tools:** Git, Python 3 for the [repository checks](../tools/README.md), curl, `sudo`, and common command-line utilities.
@@ -60,7 +60,7 @@ With Podman, add `--docker-path podman` to each `devcontainer` command, and use 
 | Rebuild after changing the dev container files | `devcontainer up --workspace-folder . --remove-existing-container` |
 | Stop and remove the container | `docker rm -f $(docker ps -aq --filter "label=devcontainer.local_folder=$PWD")` |
 
-Removing the container discards anything installed outside the workspace, such as packages installed with `sudo apt-get`. Add tools you want to keep to the Dockerfile.
+Removing the container discards anything installed outside the workspace, such as packages installed with `sudo apt-get`. Add tools you want to keep to the `dev` stage of the Dockerfile.
 
 ## Using an Editor
 
@@ -82,7 +82,7 @@ uv run --no-project tools/scripts/run_checks.py
 
 Change the shared dev container files in a pull request, so that every contributor and CI get the same environment.
 
-* **Toolchains and system packages:** Add them to the Dockerfile in their own `RUN` instruction, and pin their versions. For example, install a compiler with `apt-get`, or copy a language's version manager or package manager from its official image.
+* **Toolchains and system packages:** Add them to the `dev` stage of the Dockerfile in their own `RUN` instruction, and pin their versions. For example, install a compiler with `apt-get`, or copy a language's version manager or package manager from its official image.
 * **Project setup:** Add steps to `post-create.sh` that need the mounted workspace, such as installing dependencies. Keep each step safe to run again.
 * **Environment variables:** Add them to `containerEnv` in `devcontainer.json`. Keep secrets out of the repository and out of the image.
 * **Ports:** List ports that the project serves, such as a local web server, in `forwardPorts` in `devcontainer.json`.
@@ -91,7 +91,7 @@ Change the shared dev container files in a pull request, so that every contribut
 
 Document the project's build, test, and run commands in the root README, and state that they run in the dev container.
 
-The Dockerfile's stage is named `dev`. A project that publishes a runtime image can add build and runtime stages to the same Dockerfile and keep this stage for development.
+The `build` stage starts from `dev`, so the service is built with the same tools you develop with. [Self-Hosting](../docs/guides/self-hosting.md) explains how the `runtime` stage is run on servers.
 
 ## Troubleshooting
 

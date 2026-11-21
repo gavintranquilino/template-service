@@ -1,0 +1,45 @@
+# Runs the published service image. See docs/guides/self-hosting.md.
+#
+#   Start:   docker compose up -d
+#   Update:  docker compose up -d --pull always
+#   Stop:    docker compose down
+#
+# Servers need only this file and a .env file. In a clone of the repository,
+# compose.override.yaml adds a local build: docker compose up -d --build
+
+services:
+  app:
+    # Replace the repository path when adopting the template. GitHub container
+    # registry names are lowercase. APP_VERSION selects the tag.
+    image: ghcr.io/gavintranquilino/template-service:${APP_VERSION:-latest}
+    # Settings and secrets passed to the service. List each one here and in
+    # .env.example. Docker Compose reads the values from .env in this folder,
+    # or from the variables entered in a tool such as Portainer or Unraid.
+    # Use ${NAME:?message} for required values, so that a missing one stops
+    # the start with a clear error.
+    environment:
+      APP_VERSION: ${APP_VERSION:-latest}
+      # EXAMPLE_API_TOKEN: ${EXAMPLE_API_TOKEN:?Set EXAMPLE_API_TOKEN in .env}
+    restart: unless-stopped
+    # Runs a small init process that passes stop signals to the service.
+    init: true
+    volumes:
+      - data:/data
+    # Publish the ports the service listens on, as HOST:CONTAINER.
+    # ports:
+    #   - "8080:8080"
+    # Let Docker report whether the service is working.
+    # healthcheck:
+    #   test: ["CMD", "/app/healthcheck"]
+    #   interval: 30s
+    #   timeout: 5s
+    #   retries: 3
+    # Limit log size so that logs cannot fill the disk or wear out an SD card.
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
+
+volumes:
+  data:

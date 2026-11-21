@@ -20,7 +20,7 @@ Read the [Coding Style](docs/coding-style.md) and [Documentation](docs/documenta
 * Discuss substantial design choices in a lightweight proposal when they need agreement before implementation. Routine changes can be discussed in the pull request.
 * Explain why a new dependency is needed and consider its maintenance, license, and effect on users.
 * Identify generated files and document the command and prerequisites used to regenerate them. Change their source and regenerate the output rather than editing generated output by hand.
-* Keep secrets, credentials, and machine-specific configuration out of version control. Provide example configuration with placeholders when setup needs it.
+* Keep secrets, credentials, and machine-specific configuration out of version control and container images. Add each new setting to `.env.example` with a placeholder and to the `environment` section of `compose.yaml`.
 
 ## Verification
 
@@ -36,4 +36,4 @@ Pull requests run the checks described in [Tools](tools/README.md), which also e
 
 A pull request should explain the problem, the resulting behavior, and how the change was verified. Include limitations or follow-up work when they affect review. The [pull request template](.github/pull_request_template.md) provides sections for changes, testing, and impact. Disclose when AI tools contributed to the change.
 
-Address review feedback and complete applicable checks before merging. Follow the repository's configured review requirements. For monorepos, verify the affected components and shared dependents as appropriate.
+Address review feedback and complete applicable checks before merging. When a change affects the image or `compose.yaml`, run the service locally with `docker compose up -d --build` before merging. Merging to `main` publishes a new `main` image, and [Releasing](docs/guides/releasing.md) explains how to publish a version. Follow the repository's configured review requirements. For monorepos, verify the affected components and shared dependents as appropriate.

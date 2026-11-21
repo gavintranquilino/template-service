@@ -10,10 +10,11 @@ Use this base as the starting files for a new repository or as the foundation of
 4. Review the contribution and documentation conventions. Document any project-specific exceptions explicitly.
 5. Add language rules in [Coding Style](../coding-style.md) and toolchains in the [dev container](../../.devcontainer/README.md#customizing-the-container) as languages are introduced. Rename the container in `devcontainer.json` after the project.
 6. Extend `.gitignore` for the project's real tools and generated outputs. Keep shared example configuration tracked and use placeholders for secrets. Add language settings to `.editorconfig` and any special line-ending rules to `.gitattributes`.
-7. Adapt `.github/pull_request_template.md` to the project's review needs. Move or remove it if the repository is not hosted on GitHub.
-8. Choose an appropriate license and add its text and any necessary notices before distributing the project. This template does not select a license for you.
-9. Update the [Documentation Map](../README.md), guide index, and glossary to match the repository.
-10. Check that local links resolve and that every documented command or capability is available.
+7. Set the image name in `compose.yaml` to the repository's GitHub path in lowercase. Add the service's build to the `build` stage of the Dockerfile and its start command to the `runtime` stage, and list its settings in `.env.example` and in the `environment` section of `compose.yaml`. After the first publish, check the package's visibility as [Releasing](releasing.md#after-the-first-publish) describes.
+8. Adapt `.github/pull_request_template.md` to the project's review needs. Move or remove it if the repository is not hosted on GitHub.
+9. Choose an appropriate license and add its text and any necessary notices before distributing the project. This template does not select a license for you.
+10. Update the [Documentation Map](../README.md), guide index, and glossary to match the repository.
+11. Check that local links resolve and that every documented command or capability is available.
 
 ## Choose a Layout
 

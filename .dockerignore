@@ -1,0 +1,11 @@
+# Files kept out of image builds, whose context is the repository root.
+# Secrets must never reach an image.
+.env
+.env.*
+!.env.example
+
+# Version control and development files that the service does not need.
+.git
+.devcontainer
+
+# Add build outputs, dependency directories, and local caches here.

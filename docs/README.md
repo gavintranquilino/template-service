@@ -16,5 +16,7 @@ The documents supplied by this base template are listed below. [Documentation](d
 
 * [Guide Index](guides/README.md) lists the included guides.
 * [Template Usage](guides/template-usage.md) covers adopting and extending the base.
+* [Self-Hosting](guides/self-hosting.md) covers running the service on a Raspberry Pi, laptop, or server.
+* [Releasing](guides/releasing.md) covers version numbers, releases, and published images.
 
 Add links to project-wide design documents, proposals, and guides here as they are introduced. Link component-specific documents from the component's README.
